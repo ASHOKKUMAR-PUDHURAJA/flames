@@ -1,0 +1,160 @@
+<html>
+<head>
+	<title>FLAMES CHECKER</title>
+	</head>
+<style>
+	body
+	{
+		background-image: url("image.jpg") ;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	h1
+	{
+		font-size: 60px;
+		color: limegreen;
+		text-align: center;
+	}
+	fieldset
+	{
+		position: absolute;
+  			top: 30%;
+  			right: 15%;
+  		text-align: center;
+  		color: yellow;
+  		font-size: 20;
+  		font-family:cursive;
+  		font-display: fallback;
+	}
+	input
+	{
+width: 200px;
+  height: 53px;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 10px 20px rgba(95, 95, 95, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20;
+  color: forestgreen;
+  font-weight: bolder;
+	}
+.imgresult
+{
+	top: 30%;
+	left: 25%;
+	width: 200px;
+	height: 200px;
+}
+</style>
+<body>
+	<h1>CHECK WHO IS YOUR WHO???&#128512; &#128516;</h1>
+	<fieldset class="inputs">
+		<label>NAME 1</label></br></br>
+		<input type="textbox" id="name1"></br></br>
+		<label>NAME 2</label></br></br>
+		<input type="textbox" id="name2"></br></br>
+		<input type="button" onclick="flames()" value="FIND MY WHO">
+
+	</fieldset>
+	<p id="result">
+	<img src="enemy.jpg" hidden id="enemy">
+	<img src="friends.jpg" hidden id="friends">
+	<img src="love.jpg" hidden id="love">
+	<img src="affection.jpg" hidden id="affection">
+	<img src="marriage.jpg" hidden id="marriage">
+	<img src="sister.jpg" hidden id="sister">
+		</p>
+	<script type="text/javascript">
+
+		function flames()
+		{
+			let name1=document.getElementById("name1").value;
+			let name2=document.getElementById("name2").value;
+            let count=0;
+            let flam=['F','L','A','M','E','S'];
+			let array1=new Array();
+			let array2=new Array();
+			for(let i=0;i<name1.length;i++)
+			{
+				array1[i]=name1.charAt(i);
+			}
+			for(let j=0;j<name2.length;j++)
+			{
+				array2[j]=name2.charAt(j);
+			}
+			for(let i=0;i<name1.length;i++)
+			{
+				for(let j=0;j<name2.length;j++)
+				{
+					if(array1[i]==array2[j] && array1[i]!='\0')
+					{
+						count=count+2;
+						array1[i]='\0';
+						array2[j]='\0';
+					}
+				}
+			}
+			count=name1.length+name2.length-count;
+		let len=6,index=0;
+        let start=((0+count)%len)-1;
+        if(start<0)
+            start=0;
+
+        while(len>=3)
+        {
+
+            flam[start]='\0';
+            flam=sort1(flam,start,len);
+            len--;
+           start=((0+count)%len);
+           start=(start==0)?(len-1):(start-1);
+
+        }
+        let printindex=(count%2==0)?0:1;
+        let returnvalue=flam[printindex];
+        switch(flam[printindex])
+        {
+            case 'F': returnvalue="friends"; break;
+            case 'L':returnvalue="love";break;
+            case 'A':returnvalue="affection";break;
+            case 'm':returnvalue="marriage";break;
+            case 'E':returnvalue="enemy";break;
+            case 'S':returnvalue="sister";break;
+        }
+       	
+       setImageVisible(returnvalue);
+        
+        
+		}
+	function sort1(array,start,len)
+    {
+        let index=0;
+       let temparray=new Array();
+       start=(start+1)%len;
+      let count=1;
+        for(let i=start;count<=6;i=(i+1)%array.length)
+        {
+            if(array[i]!='\0')
+            {
+                temparray[index++]=array[i];
+            }
+            count=count+1;
+
+        }
+     
+        
+        array=temparray;
+        return array;
+    }
+    function setImageVisible(id) 
+    {
+   	let img = document.getElementById(id);
+    img.style.display='block';
+	}
+
+	</script>
+</body>
+</html>
